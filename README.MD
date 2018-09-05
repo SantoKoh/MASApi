@@ -1,7 +1,7 @@
-Example - calling MAS Client REST api  to generate interestRate/finanical reports
+Example - calling MAS REST api to generate interestRate/finanical reports  
 ================================
 
-The article: []  
+The article: [https://github.com/SantoKoh/MASApi]  
 
 -----------
 [Requirements]
@@ -12,9 +12,18 @@ The article: []
 -----------
 [Quick start]
 -----------
-1. `mvn install`
+1. `mvn install`  
+```sh
+$ mvn install
+```
 2.  to run 		-->		`java -jar target/MASApi-1.0-SNAPSHOT.jar report.type=M start.date=Jan-2018 end.date=Aug-2018 display.type=1,3-4,9`  
+```sh
+$ java -jar target/MASApi-1.0-SNAPSHOT.jar report.type=M start.date=Jan-2018 end.date=Aug-2018 display.type=1,3-4,9
+```
 3.  to export the report to a file, you may use append mode '> masreport.log', `java -jar target/MASApi-1.0-SNAPSHOT.jar report.type=M start.date=Jan-2018 end.date=Aug-2018 display.type=1,3-4,9 > masreport.log`
+```sh
+$ java -jar target/MASApi-1.0-SNAPSHOT.jar report.type=M start.date=Jan-2018 end.date=Aug-2018 display.type=1,3-4,9 > masreport.log
+```
 4.  to display the report file, window dos -> `type masreport.log`   , linux -> `cat masreport.log`  
 5.  arguments input eg.  
 	i)		report.type=M [M=monthly, m=monthly, Y=yearly, y=yearly]  
@@ -27,13 +36,14 @@ The article: []
 [Assumption]
 -----------
 1. RESOURCE_ID = `5f2b18a8-0883-4769-a635-879c63d3caac` for monthly, `bd841397-108f-4644-8da3-38a7c159d68a` for yearly  
-2. Only support 2 report types, the report will go by asscending order, when the trend is up it will have a '+' beside the percenage and '-' if it is going down from previous month/year rates.  
-3. ReportGenerator is a interface class and can be used to impelment different reports type, passing the data objects (InterestRate->Result->Records)  
-4. Processor is a interface calss and can be used to implement the two different report processing (business logic) type (monthly, yearly),   
+2. Only support 2 report types, the report will go by ascending order, when the trend is up it will have a '+' beside the percentage and '-' if it is going down from previous month/year rates.  
+3. ReportGenerator is a interface class and can be used to implement different reports type, passing the data objects (InterestRate->Result->Records)  
+4. Processor is a interface class and can be used to implement the two different report processing (business logic) type (monthly, yearly),   
 5. ProcessorImpl is a abstract class to force the implementation of `process` method and the variables object by its inheritance class, it also encapsulate `generateReport` method and variables  
-5. enum object is used and that is mapped to the Spring configuration beans for the impelmention ProcessorImpl class.  
+5. enum object is used and that is mapped to the Spring configuration beans for the implementation ProcessorImpl class.  
 6. the program does not use Database or Filesystem to store data, if required DAO (Data Access Object) can be used  
-7. there is no properties variables used, the varibles are in constants class, if required, it can be changed to load from properties using Spring Configuration.  
+7. there is no properties variables used, the variables are in constants class, if required, it can be changed to load from properties using Spring Configuration.  
+8. Application does not have retry setting for REST API to MAS website if it fails to connect with 200 status, it also doesn't implement readtimeout setting, leaving it to default.  
 
 
 -----------
