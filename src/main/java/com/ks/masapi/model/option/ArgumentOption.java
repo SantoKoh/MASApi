@@ -74,7 +74,10 @@ public class ArgumentOption extends AppConstants {
 							String[] items = argItem.split("=");
 							if (items.length == 2) {
 								String strDate = items[1];
-								startDate = dateFormatterInput.parse(strDate);
+								if (strDate.length()>=8)
+									startDate = dateFormatterInput.parse(strDate);
+								else
+									throw new AppException(ERR_MSG_INVALID_OPTION_DATE_RANGE);
 							}
 						} catch (Exception e) {
 							throw new AppException(ERR_MSG_INVALID_OPTION_DATE_RANGE);
@@ -84,7 +87,10 @@ public class ArgumentOption extends AppConstants {
 							String[] items = argItem.split("=");
 							if (items.length == 2) {
 								String strDate = items[1];
-								endDate = dateFormatterInput.parse(strDate);
+								if (strDate.length()>=8)
+									endDate = dateFormatterInput.parse(strDate);
+								else
+									throw new AppException(ERR_MSG_INVALID_OPTION_DATE_RANGE);
 							}
 						} catch (Exception e) {
 							throw new AppException(ERR_MSG_INVALID_OPTION_DATE_RANGE);
@@ -137,14 +143,12 @@ public class ArgumentOption extends AppConstants {
 			if (startDate == null || endDate == null || startDate.after(endDate)) {
 				throw new AppException(ERR_MSG_INVALID_OPTION_DATE_RANGE);
 			}
-			logger.info("startDate=" + dateFormatterAPI.format(startDate));
-			logger.info("endDate=" + dateFormatterAPI.format(endDate));
+			logger.info("startDate=" + dateFormatterMonthlyAPI.format(startDate));
+			logger.info("endDate=" + dateFormatterMonthlyAPI.format(endDate));
 			logger.info("listDisplayTypeNumbers=" + listDisplayTypeNumbers);
 			// Empty input, will set all
 			if (listDisplayTypeNumbers.isEmpty()) {
-				for (int intDisplayIndex : listDisplayTypeNumbers) {
-					hmapRecordTypeOption.get(intDisplayIndex - 1).setDisplayOnReport(true);
-				}
+				throw new AppException(ERR_MSG_INVALID_OPTION_DISPLAY_RPT_COL);
 			} else {
 				for (int intDisplayIndex : listDisplayTypeNumbers) {
 					hmapRecordTypeOption.get(intDisplayIndex - 1).setDisplayOnReport(true);

@@ -34,12 +34,13 @@ public class ProcessorMonthlyImpl extends ProcessorImpl{
 		InterestRate interestRate = null;
 		try {	
 			String dateRange = AppConstants.MAS_REST_PRARM_MONTHLY_DATE_RANGE 
-					+ AppConstants.dateFormatterAPI.format(argumentOption.getStartDate()) 
-					+ "," + AppConstants.dateFormatterAPI.format(argumentOption.getEndDate());
+					+ AppConstants.dateFormatterMonthlyAPI.format(argumentOption.getStartDate()) 
+					+ "," + AppConstants.dateFormatterMonthlyAPI.format(argumentOption.getEndDate());
 			String urlInput = AppConstants.MAS_REST_URL + AppConstants.MAS_REST_PRARM_RESOURCE_ID 
 					+ AppConstants.MAS_REST_RESOURCE_ID_MONTHLY 
 					+ AppConstants.MAS_REST_PRARM_LIMIT + limits + dateRange 
 					+ AppConstants.MAS_REST_PRARM_MONTHLY_SORT_ASC;
+			logger.info("urlInput=" + urlInput + ".... \n");
 			interestRate = restClient.connect(urlInput);
 			if (interestRate != null){
 				if (interestRate.getResult().getTotal() != null){

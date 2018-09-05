@@ -33,12 +33,13 @@ public class ProcessorYearlyImpl extends ProcessorImpl{
 		InterestRate interestRate = null;
 		try {	
 			String dateRange = AppConstants.MAS_REST_PRARM_YEARLY_DATE_RANGE 
-					+ AppConstants.dateFormatterAPI.format(argumentOption.getStartDate()) + "," 
-					+ AppConstants.dateFormatterAPI.format(argumentOption.getEndDate());
+					+ AppConstants.dateFormatterYearlyAPI.format(argumentOption.getStartDate()) + "," 
+					+ AppConstants.dateFormatterYearlyAPI.format(argumentOption.getEndDate());
 			String urlInput = AppConstants.MAS_REST_URL 
 					+ AppConstants.MAS_REST_PRARM_RESOURCE_ID + AppConstants.MAS_REST_RESOURCE_ID_YEARLY 
 					+ AppConstants.MAS_REST_PRARM_LIMIT + limits + dateRange 
 					+ AppConstants.MAS_REST_PRARM_YEARLY_SORT_ASC;
+			logger.info("urlInput=" + urlInput + ".... \n");
 			interestRate = restClient.connect(urlInput);
 			if (interestRate != null){
 				if (interestRate.getResult().getTotal() != null){

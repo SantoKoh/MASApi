@@ -34,7 +34,8 @@ public class AppConstants {
 	public static int LOOP_COUNTER_BREAKER = 100;
 	
 	public static SimpleDateFormat dateFormatterInput = new SimpleDateFormat("MMM-yyyy");
-	public static SimpleDateFormat dateFormatterAPI = new SimpleDateFormat("yyyy-MM");
+	public static SimpleDateFormat dateFormatterMonthlyAPI = new SimpleDateFormat("yyyy-MM");
+	public static SimpleDateFormat dateFormatterYearlyAPI = new SimpleDateFormat("yyyy");
 	public static SimpleDateFormat dateFormatterReportDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public static String ERR_MSG_INVALID_OPTION_EMPTY = "Empty input options";
